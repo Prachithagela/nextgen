@@ -1,42 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Project with Chatbot</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NovaSpark Sales Intelligence Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg:#f4f1eb;--surface:#ffffff;--surface2:#faf8f4;--border:#e8e3d9;
+      --text:#1a1714;--muted:#8a8279;
+      --accent:#c8622a;--accent2:#3a6b9e;--accent3:#2d7a5e;--accent4:#9b4d8e;--gold:#d4983a;
+      --shadow:0 2px 16px rgba(26,23,20,.07);--shadow-lg:0 8px 40px rgba(26,23,20,.11);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;line-height:1.5}
+
+    /* Sidebar */
+    .sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;background:var(--text);display:flex;flex-direction:column;z-index:100}
+    .sidebar-logo{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .brand{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:#fff;line-height:1.1}
+    .brand span{color:var(--accent)}
+    .sub{font-size:10px;font-weight:500;color:rgba(255,255,255,.35);letter-spacing:.12em;text-transform:uppercase;margin-top:4px}
+    .sidebar-nav{flex:1;padding:20px 12px;display:flex;flex-direction:column;gap:2px}
+    .nav-lbl{font-size:10px;font-weight:600;color:rgba(255,255,255,.25);letter-spacing:.12em;text-transform:uppercase;padding:12px 12px 6px}
+    .nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;color:rgba(255,255,255,.5);cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;text-decoration:none}
+    .nav-item:hover{background:rgba(255,255,255,.08);color:#fff}
+    .nav-item.active{background:rgba(200,98,42,.2);color:var(--accent)}
+    .nav-icon{font-size:16px;width:20px;text-align:center}
+    .sidebar-footer{padding:16px;border-top:1px solid rgba(255,255,255,.08)}
+    .fy-badge{background:rgba(212,152,58,.15);border:1px solid rgba(212,152,58,.3);border-radius:8px;padding:10px 12px;color:var(--gold);font-size:11px;font-weight:600;text-align:center}
+
+    /* Main */
+    .main{margin-left:220px;min-height:100vh;display:flex;flex-direction:column}
+    .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 1px 0 var(--border)}
+    .topbar h1{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;line-height:1.2}
+    .topbar .subtitle{font-size:12px;color:var(--muted)}
+    .topbar-right{display:flex;align-items:center;gap:12px}
+    .live-dot{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--accent3);background:rgba(45,122,94,.08);padding:6px 12px;border-radius:999px;border:1px solid rgba(45,122,94,.2)}
+    .live-dot::before{content:'';width:7px;height:7px;background:var(--accent3);border-radius:50%;animation:blink 1.4s ease-in-out infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+    .date-chip{font-size:12px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);padding:6px 12px;border-radius:8px}
+    .content{flex:1;padding:28px 32px 60px}
+
+    /* Section heading */
+    .sh{display:flex;align-items:center;gap:10px;margin-bottom:16px;margin-top:32px}
+    .sh:first-child{margin-top:0}
+    .sh h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
+    .sh::after{content:'';flex:1;height:1px;background:var(--border)}
+
+    /* KPIs */
+    .kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:8px}
+    .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+    .kpi-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+    .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--kc,var(--accent))}
+    .kpi-lbl{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+    .kpi-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;line-height:1;margin-bottom:6px}
+    .kpi-delta{font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:999px}
+    .up{background:rgba(45,122,94,.1);color:var(--accent3)}
+    .down{background:rgba(200,98,42,.1);color:var(--accent)}
+    .kpi-icon{position:absolute;right:18px;top:18px;font-size:22px;opacity:.15}
+
+    /* Grids */
+    .g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .g21{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+
+    /* Card */
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;transition:transform .2s,box-shadow .2s}
+    .card:hover{box-shadow:var(--shadow-lg)}
+    .ch{padding:18px 22px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .ct{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+    .cp{font-size:11px;font-weight:500;padding:3px 10px;border-radius:999px;background:var(--surface2);border:1px solid var(--border);color:var(--muted)}
+    .cb{padding:20px 22px}
+    .cw{padding:16px 20px 20px}
+    .cw canvas{max-height:240px}
+
+    /* Table */
+    table{width:100%;border-collapse:collapse}
+    th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:10px 14px;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left}
+    td{padding:11px 14px;border-bottom:1px solid var(--border);font-size:13px}
+    tr:last-child td{border-bottom:none}
+    tr:hover td{background:var(--surface2)}
+    .bi{display:flex;align-items:center;gap:8px}
+    .bb{flex:1;height:6px;background:var(--border);border-radius:999px;overflow:hidden}
+    .bf{height:100%;border-radius:999px}
+
+    /* Region bars */
+    .rl{display:flex;flex-direction:column;gap:12px}
+    .ri{display:flex;flex-direction:column;gap:4px}
+    .rr{display:flex;justify-content:space-between;font-size:13px}
+    .rn{font-weight:600}
+    .rv{color:var(--muted);font-weight:500}
+    .rb{height:8px;background:var(--border);border-radius:999px;overflow:hidden}
+    .rf{height:100%;border-radius:999px}
+
+    /* Chat */
+    .chat-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+    .chat-hdr{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#1a1714 0%,#2d2420 100%);color:#fff}
+    .bot-ic{width:36px;height:36px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
+    .bot-name{font-weight:700;font-size:14px}
+    .bot-st{font-size:11px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px}
+    .bot-st::before{content:'';width:6px;height:6px;background:var(--accent3);border-radius:50%}
+    .cf{display:flex;flex-direction:column;gap:6px;padding:14px 18px;border-bottom:1px solid var(--border);background:var(--surface2)}
+    .fc{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+    .jf{flex:1;min-height:420px;background:#fff}
+    #joonbot-embed{width:100%;height:100%;min-height:420px}
+
+    /* Misc */
+    ::-webkit-scrollbar{width:6px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+    .fade{animation:fi .4s ease both}
+    @keyframes fi{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+    @media(max-width:1200px){.kpi-row{grid-template-columns:repeat(3,1fr)}.g21{grid-template-columns:1fr}}
+    @media(max-width:900px){.sidebar{width:60px}.brand,.sub,.nav-item span,.nav-lbl,.sidebar-footer{display:none}.main{margin-left:60px}.g2{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}}
+  </style>
 </head>
 <body>
-<h2>Project Document</h2>
 
-<iframe 
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQi20aH4JFni-_Pl4HivYO5YmcB5S0sMpTWtAqV01tt-Njvz71NGe-f8V5pN4HXuY9XY0-t1VKt7agq/pubhtml?widget=true&headers=false%22
-    width="100%" 
-    height="400">
-</iframe>
-<hr>
-<h2>💬 Chat with Us</h2>
-<!-- Joonbot Embed -->
-<script async type="text/javascript">
-        !function () {
-            if (window.JOONBOT_WIDGET_ID) {
-                console.warn("Joonbot snippet included twice");
-            } else {
-                window.JOONBOT_MODE = "embed";
-                window.JOONBOT_WIDGET_ID = "764472ea-fdfc-4ccd-85f1-656532c4bcda";
-                var n, o;
-                o = document.createElement("script");
-                o.src = "https://js.joonbot.com/init.js";
-                o.defer = true;
-                o.type = "text/javascript";
-                o.async = true;
-                o.crossorigin = "anonymous";
-                n = document.getElementsByTagName("script")[0];
-                n.parentNode.insertBefore(o, n);
-            }
-        }();
-</script>
-<div id="joonbot-embed" 
-         style="background-color:lightgrey;width:100%;height:500px;">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand">Nova<span>Spark</span></div>
+    <div class="sub">Sales Intelligence</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-lbl">Analytics</div>
+    <a class="nav-item active" href="#"><span class="nav-icon">📊</span><span>Overview</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">🛒</span><span>Transactions</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">📦</span><span>SKU Performance</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">🌏</span><span>Regions</span></a>
+    <div class="nav-lbl">Intelligence</div>
+    <a class="nav-item" href="#"><span class="nav-icon">👥</span><span>Customers</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">🤖</span><span>AI Assistant</span></a>
+    <a class="nav-item" href="#"><span class="nav-icon">⚙️</span><span>Settings</span></a>
+  </nav>
+  <div class="sidebar-footer"><div class="fy-badge">FY 2024 · Live</div></div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <header class="topbar">
+    <div>
+      <h1>Sales Intelligence Hub</h1>
+      <div class="subtitle">Global Consumer Electronics &amp; Lifestyle Retail · 420 Stores · 12 Countries</div>
+    </div>
+    <div class="topbar-right">
+      <span class="live-dot">Live Data</span>
+      <span class="date-chip">📅 FY 2023 – 2024</span>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- KPIs -->
+    <div class="sh"><h2>Key Performance Indicators</h2></div>
+    <div class="kpi-row fade">
+      <div class="kpi-card" style="--kc:#c8622a"><div class="kpi-icon">💰</div><div class="kpi-lbl">Total Revenue</div><div class="kpi-val">$847.3M</div><span class="kpi-delta up">↑ +18.4% YoY</span></div>
+      <div class="kpi-card" style="--kc:#3a6b9e"><div class="kpi-icon">🛒</div><div class="kpi-lbl">Total Orders</div><div class="kpi-val">6.82M</div><span class="kpi-delta up">↑ +22.1% YoY</span></div>
+      <div class="kpi-card" style="--kc:#2d7a5e"><div class="kpi-icon">👥</div><div class="kpi-lbl">Active Customers</div><div class="kpi-val">1.24M</div><span class="kpi-delta up">↑ +14.7% YoY</span></div>
+      <div class="kpi-card" style="--kc:#9b4d8e"><div class="kpi-icon">💎</div><div class="kpi-lbl">Avg Order Value</div><div class="kpi-val">$124.20</div><span class="kpi-delta up">↑ +4.3% YoY</span></div>
+      <div class="kpi-card" style="--kc:#d4983a"><div class="kpi-icon">🏆</div><div class="kpi-lbl">NPS Score</div><div class="kpi-val">72</div><span class="kpi-delta up">↑ +9 pts</span></div>
+    </div>
+
+    <!-- Revenue charts -->
+    <div class="sh" style="margin-top:28px"><h2>Revenue Trends</h2></div>
+    <div class="g2">
+      <div class="card">
+        <div class="ch"><div class="ct">📈 Monthly Revenue by Category ($M)</div><span class="cp">FY 2024</span></div>
+        <div class="cw"><canvas id="revChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="ch"><div class="ct">🍩 Revenue Mix by Category</div><span class="cp">FY Total</span></div>
+        <div class="cw"><canvas id="catChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- SKU + Region + Total -->
+    <div class="sh" style="margin-top:28px"><h2>Product &amp; Regional Performance</h2></div>
+    <div class="g21">
+      <div class="card">
+        <div class="ch"><div class="ct">📦 Top SKU Performance</div><span class="cp">by Revenue</span></div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Product</th><th>Revenue</th><th>GP Margin</th><th>Tier</th></tr></thead>
+            <tbody>
+              <tr><td><strong>iPhone 15 Pro</strong><br><small style="color:var(--muted)">SP-001 · Smartphones</small></td><td>$6.17M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:54%;background:var(--accent3)"></div></div><span>54.4%</span></div></td><td style="color:var(--gold);font-weight:700">⭐ Star</td></tr>
+              <tr><td><strong>Google Pixel 8</strong><br><small style="color:var(--muted)">SP-003 · Smartphones</small></td><td>$4.60M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:52%;background:var(--accent3)"></div></div><span>52.0%</span></div></td><td style="color:var(--gold);font-weight:700">⭐ Star</td></tr>
+              <tr><td><strong>Dell XPS 15</strong><br><small style="color:var(--muted)">LP-002 · Laptops</small></td><td>$2.09M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:43%;background:var(--accent2)"></div></div><span>42.7%</span></div></td><td style="color:var(--accent2);font-weight:600">✅ Core</td></tr>
+              <tr><td><strong>MacBook Air M3</strong><br><small style="color:var(--muted)">LP-001 · Laptops</small></td><td>$2.05M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:43%;background:var(--accent2)"></div></div><span>42.8%</span></div></td><td style="color:var(--accent2);font-weight:600">✅ Core</td></tr>
+              <tr><td><strong>Apple Watch Ultra 2</strong><br><small style="color:var(--muted)">WR-001 · Wearables</small></td><td>$1.97M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:47%;background:var(--accent2)"></div></div><span>47.5%</span></div></td><td style="color:var(--gold);font-weight:700">⭐ Star</td></tr>
+              <tr><td><strong>iPad Pro 12.9</strong><br><small style="color:var(--muted)">TB-001 · Tablets</small></td><td>$1.86M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:44%;background:var(--gold)"></div></div><span>44.3%</span></div></td><td style="color:var(--accent2);font-weight:600">✅ Core</td></tr>
+              <tr><td><strong>PlayStation 5</strong><br><small style="color:var(--muted)">GM-001 · Gaming</small></td><td>$1.58M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:43%;background:var(--accent4)"></div></div><span>43.2%</span></div></td><td style="color:var(--accent2);font-weight:600">✅ Core</td></tr>
+              <tr><td><strong>Samsung Galaxy S24</strong><br><small style="color:var(--muted)">SP-002 · Smartphones</small></td><td>$1.13M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:46%;background:var(--accent2)"></div></div><span>46.1%</span></div></td><td style="color:var(--gold);font-weight:700">⭐ Star</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div class="card">
+          <div class="ch"><div class="ct">🌏 Revenue by Region ($M)</div></div>
+          <div class="cb">
+            <div class="rl">
+              <div class="ri"><div class="rr"><span class="rn">Europe</span><span class="rv">$341.8M</span></div><div class="rb"><div class="rf" style="width:100%;background:var(--accent2)"></div></div></div>
+              <div class="ri"><div class="rr"><span class="rn">Asia Pacific</span><span class="rv">$337.8M</span></div><div class="rb"><div class="rf" style="width:98.8%;background:var(--accent3)"></div></div></div>
+              <div class="ri"><div class="rr"><span class="rn">North America</span><span class="rv">$247.1M</span></div><div class="rb"><div class="rf" style="width:72.3%;background:var(--accent)"></div></div></div>
+              <div class="ri"><div class="rr"><span class="rn">Latin America</span><span class="rv">$105.9M</span></div><div class="rb"><div class="rf" style="width:31%;background:var(--gold)"></div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="ch"><div class="ct">📊 Total Monthly Revenue ($M)</div></div>
+          <div class="cw" style="padding:14px 16px 16px"><canvas id="totalChart" style="max-height:160px"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Chat -->
+    <div class="sh" style="margin-top:28px"><h2>AI Sales Assistant</h2></div>
+    <div class="g21">
+      <div class="chat-card">
+        <div class="chat-hdr">
+          <div class="bot-ic">🤖</div>
+          <div><div class="bot-name">NovaSpark AI Assistant</div><div class="bot-st">Online · Powered by Joonbot</div></div>
+        </div>
+        <div class="cf">
+          <div class="fc">💬 Ask about sales data, regions, top products</div>
+          <div class="fc">📋 Request instant summaries and insights</div>
+          <div class="fc">🔍 Search across all 600+ transaction records</div>
+        </div>
+        <div class="jf"><div id="joonbot-embed"></div></div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="card"><div class="cb">
+          <div style="font-size:24px;margin-bottom:10px">🧠</div>
+          <div style="font-weight:700;font-size:14px;margin-bottom:6px">Claude AI Integration</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6">Connect Anthropic Claude API to answer natural-language questions about NovaSpark data — ask "Which region had the highest Q4 growth?"</div>
+          <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--accent2);background:rgba(58,107,158,.08);padding:4px 10px;border-radius:999px;display:inline-block">anthropic.com/api</div>
+        </div></div>
+        <div class="card"><div class="cb">
+          <div style="font-size:24px;margin-bottom:10px">📈</div>
+          <div style="font-weight:700;font-size:14px;margin-bottom:6px">Auto Chart Generator</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6">Ask AI to visualize any column — Q4 revenue by country, top SKUs by margin, churn rate over time — charts rendered live.</div>
+          <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--accent3);background:rgba(45,122,94,.08);padding:4px 10px;border-radius:999px;display:inline-block">Chart.js + AI</div>
+        </div></div>
+        <div class="card"><div class="cb">
+          <div style="font-size:24px;margin-bottom:10px">🔔</div>
+          <div style="font-weight:700;font-size:14px;margin-bottom:6px">Smart Alerts</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6">AI monitors your data and sends alerts when stockout risk turns red, revenue dips, or NPS drops below threshold.</div>
+          <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--gold);background:rgba(212,152,58,.08);padding:4px 10px;border-radius:999px;display:inline-block">Apps Script + AI</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;padding-top:20px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:12px">
+      NovaSpark Sales Intelligence · FY 2023–2024 · 420 Stores · 12 Countries · Powered by Joonbot &amp; Chart.js
+    </div>
+
+  </div>
 </div>
+
+<!-- CHARTS -->
+<script>
+const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+new Chart(document.getElementById('revChart').getContext('2d'),{
+  type:'bar',
+  data:{labels:months,datasets:[
+    {label:'Smartphones',data:[7.2,6.8,8.1,7.5,8.9,9.2,8.6,9.8,10.2,9.1,12.4,14.3],backgroundColor:'#c8622a'},
+    {label:'Laptops',    data:[5.4,4.9,6.2,5.8,6.7,7.1,6.4,7.3,7.9,6.8,9.2,10.8], backgroundColor:'#3a6b9e'},
+    {label:'Gaming',     data:[3.5,3.1,3.8,3.4,4.2,4.8,4.3,5.1,5.6,4.8,7.2,9.4],  backgroundColor:'#9b4d8e'},
+    {label:'Tablets',    data:[2.2,2.0,2.6,2.4,2.9,3.3,2.9,3.4,3.7,3.2,4.8,6.0],  backgroundColor:'#d4983a'},
+    {label:'Wearables',  data:[2.8,2.5,3.1,2.9,3.4,3.9,3.5,4.1,4.4,3.8,5.6,7.1],  backgroundColor:'#2d7a5e'},
+    {label:'Audio',      data:[2.1,1.9,2.4,2.2,2.7,3.1,2.8,3.2,3.5,3.0,4.6,5.8],  backgroundColor:'#5a8a3e'},
+    {label:'Smart Home', data:[1.8,1.6,2.1,1.9,2.3,2.7,2.4,2.8,3.0,2.5,3.9,5.2],  backgroundColor:'#7a5a9e'},
+  ]},
+  options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10},color:'#8a8279'}}},scales:{x:{stacked:true,grid:{color:'#e8e3d9'},ticks:{color:'#8a8279',font:{size:10}}},y:{stacked:true,grid:{color:'#e8e3d9'},ticks:{color:'#8a8279',font:{size:10},callback:v=>'$'+v+'M'}}}}
+});
+
+new Chart(document.getElementById('catChart').getContext('2d'),{
+  type:'doughnut',
+  data:{labels:['Smartphones','Laptops','Tablets','Wearables','Gaming','Audio','Smart Home','Accessories'],datasets:[{data:[11.9,9.1,7.4,6.2,5.9,4.5,2.7,0.9],backgroundColor:['#c8622a','#3a6b9e','#d4983a','#2d7a5e','#9b4d8e','#5a8a3e','#7a5a9e','#9e4a3a'],borderWidth:2,borderColor:'#ffffff',hoverOffset:6}]},
+  options:{responsive:true,maintainAspectRatio:true,cutout:'65%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10},color:'#8a8279',padding:10}},tooltip:{callbacks:{label:ctx=>` ${ctx.label}: $${ctx.parsed}M`}}}}
+});
+
+new Chart(document.getElementById('totalChart').getContext('2d'),{
+  type:'line',
+  data:{labels:months,datasets:[{label:'Grand Total ($M)',data:[25.9,23.6,29.4,27.1,32.3,35.5,32.1,37.2,40.0,34.6,49.9,61.5],borderColor:'#c8622a',backgroundColor:'rgba(200,98,42,0.08)',fill:true,tension:0.4,pointRadius:3,pointBackgroundColor:'#c8622a'}]},
+  options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#8a8279',font:{size:10}}},y:{grid:{color:'#e8e3d9'},ticks:{color:'#8a8279',font:{size:10},callback:v=>'$'+v+'M'}}}}
+});
+</script>
+
+<!-- JOONBOT -->
+<script async type="text/javascript">
+  !function(){
+    if(window.JOONBOT_WIDGET_ID){console.warn("Joonbot snippet included twice");}
+    else{
+      window.JOONBOT_MODE="embed";
+      window.JOONBOT_WIDGET_ID="764472ea-fdfc-4ccd-85f1-656532c4bcda";
+      var n,o;
+      o=document.createElement("script");
+      o.src="https://js.joonbot.com/init.js";
+      o.defer=true;o.type="text/javascript";o.async=true;o.crossorigin="anonymous";
+      n=document.getElementsByTagName("script")[0];
+      n.parentNode.insertBefore(o,n);
+    }
+  }();
+</script>
+
 </body>
 </html>
