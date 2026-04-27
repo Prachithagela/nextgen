@@ -1,315 +1,717 @@
+None selected 
+
+Skip to content
+Using Atma Ram Sanatan Dharam College Mail with screen readers
+in:sent
+
+Conversations
+To: 
+me
+Inbox
+(no subject)
+ 
+Attachment:
+prachi-2.txt
+1:06 PM
+ 
+Program Policies
+Powered by Google
+Last account activity: 20 minutes ago
+Details
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NovaSpark Sales Intelligence Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,700;9..144,900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
     :root {
-      --bg:#f4f1eb;--surface:#ffffff;--surface2:#faf8f4;--border:#e8e3d9;
-      --text:#1a1714;--muted:#8a8279;
-      --accent:#c8622a;--accent2:#3a6b9e;--accent3:#2d7a5e;--accent4:#9b4d8e;--gold:#d4983a;
-      --shadow:0 2px 16px rgba(26,23,20,.07);--shadow-lg:0 8px 40px rgba(26,23,20,.11);
+      --bg:#f7f3ee;--surf:#ffffff;--surf2:#faf7f3;--bdr:#ede8e0;
+      --txt:#1c1814;--muted:#9a9085;
+      --amber:#c8622a;--blue:#2e5f8a;--green:#2a6b50;--purple:#6b4a8a;--gold:#b8862a;
+      --sh:0 1px 12px rgba(28,24,20,.07);--sh2:0 6px 32px rgba(28,24,20,.12);
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;line-height:1.5}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--txt);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.55}
 
-    /* Sidebar */
-    .sidebar{position:fixed;top:0;left:0;width:220px;height:100vh;background:var(--text);display:flex;flex-direction:column;z-index:100}
-    .sidebar-logo{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
-    .brand{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:#fff;line-height:1.1}
-    .brand span{color:var(--accent)}
-    .sub{font-size:10px;font-weight:500;color:rgba(255,255,255,.35);letter-spacing:.12em;text-transform:uppercase;margin-top:4px}
-    .sidebar-nav{flex:1;padding:20px 12px;display:flex;flex-direction:column;gap:2px}
-    .nav-lbl{font-size:10px;font-weight:600;color:rgba(255,255,255,.25);letter-spacing:.12em;text-transform:uppercase;padding:12px 12px 6px}
-    .nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;color:rgba(255,255,255,.5);cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;text-decoration:none}
-    .nav-item:hover{background:rgba(255,255,255,.08);color:#fff}
-    .nav-item.active{background:rgba(200,98,42,.2);color:var(--accent)}
-    .nav-icon{font-size:16px;width:20px;text-align:center}
-    .sidebar-footer{padding:16px;border-top:1px solid rgba(255,255,255,.08)}
-    .fy-badge{background:rgba(212,152,58,.15);border:1px solid rgba(212,152,58,.3);border-radius:8px;padding:10px 12px;color:var(--gold);font-size:11px;font-weight:600;text-align:center}
+    /* ── SIDEBAR ── */
+    .sb{position:fixed;top:0;left:0;width:230px;height:100vh;background:#1c1814;display:flex;flex-direction:column;z-index:200;overflow:hidden}
+    .sb-logo{padding:26px 22px 20px;border-bottom:1px solid rgba(255,255,255,.07)}
+    .sb-brand{font-family:'Fraunces',serif;font-size:22px;font-weight:900;color:#fff;line-height:1}
+    .sb-brand em{color:var(--amber);font-style:normal}
+    .sb-tag{font-size:10px;font-weight:500;color:rgba(255,255,255,.3);letter-spacing:.14em;text-transform:uppercase;margin-top:5px}
+    .sb-nav{flex:1;padding:18px 12px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
+    .sb-section{font-size:10px;font-weight:700;color:rgba(255,255,255,.22);letter-spacing:.14em;text-transform:uppercase;padding:12px 10px 6px}
+    .sb-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;color:rgba(255,255,255,.45);font-size:13px;font-weight:500;text-decoration:none;cursor:pointer;transition:.15s;border:none;background:none;width:100%;text-align:left}
+    .sb-item:hover{background:rgba(255,255,255,.07);color:#fff}
+    .sb-item.active{background:rgba(200,98,42,.18);color:var(--amber)}
+    .sb-item .ic{font-size:15px;width:22px;text-align:center}
+    .sb-foot{padding:14px;border-top:1px solid rgba(255,255,255,.07)}
+    .sb-badge{background:rgba(184,134,42,.14);border:1px solid rgba(184,134,42,.28);border-radius:9px;padding:9px 12px;color:var(--gold);font-size:11px;font-weight:600;text-align:center}
 
-    /* Main */
-    .main{margin-left:220px;min-height:100vh;display:flex;flex-direction:column}
-    .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 1px 0 var(--border)}
-    .topbar h1{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;line-height:1.2}
-    .topbar .subtitle{font-size:12px;color:var(--muted)}
-    .topbar-right{display:flex;align-items:center;gap:12px}
-    .live-dot{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--accent3);background:rgba(45,122,94,.08);padding:6px 12px;border-radius:999px;border:1px solid rgba(45,122,94,.2)}
-    .live-dot::before{content:'';width:7px;height:7px;background:var(--accent3);border-radius:50%;animation:blink 1.4s ease-in-out infinite}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-    .date-chip{font-size:12px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);padding:6px 12px;border-radius:8px}
-    .content{flex:1;padding:28px 32px 60px}
+    /* ── MAIN ── */
+    .main{margin-left:230px;min-height:100vh;display:flex;flex-direction:column}
+    .topbar{background:var(--surf);border-bottom:1px solid var(--bdr);padding:0 32px;height:62px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--sh)}
+    .tb-left h1{font-family:'Fraunces',serif;font-size:19px;font-weight:700}
+    .tb-left p{font-size:12px;color:var(--muted)}
+    .tb-right{display:flex;align-items:center;gap:10px}
+    .pulse{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--green);background:rgba(42,107,80,.07);padding:6px 12px;border-radius:999px;border:1px solid rgba(42,107,80,.18)}
+    .pulse::before{content:'';width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 1.5s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+    .chip{font-size:12px;color:var(--muted);background:var(--surf2);border:1px solid var(--bdr);padding:5px 12px;border-radius:8px}
 
-    /* Section heading */
-    .sh{display:flex;align-items:center;gap:10px;margin-bottom:16px;margin-top:32px}
-    .sh:first-child{margin-top:0}
-    .sh h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
-    .sh::after{content:'';flex:1;height:1px;background:var(--border)}
+    .content{flex:1;padding:28px 32px 80px}
 
-    /* KPIs */
-    .kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:8px}
-    .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
-    .kpi-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-    .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--kc,var(--accent))}
-    .kpi-lbl{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
-    .kpi-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;line-height:1;margin-bottom:6px}
-    .kpi-delta{font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:999px}
-    .up{background:rgba(45,122,94,.1);color:var(--accent3)}
-    .down{background:rgba(200,98,42,.1);color:var(--accent)}
-    .kpi-icon{position:absolute;right:18px;top:18px;font-size:22px;opacity:.15}
+    /* ── SECTION LABEL ── */
+    .slabel{display:flex;align-items:center;gap:10px;margin-bottom:18px;margin-top:36px}
+    .slabel:first-child{margin-top:0}
+    .slabel h2{font-family:'Fraunces',serif;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap}
+    .slabel::after{content:'';flex:1;height:1px;background:var(--bdr)}
 
-    /* Grids */
+    /* ── STORY BAND ── */
+    .story-band{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--bdr);border:1px solid var(--bdr);border-radius:16px;overflow:hidden;margin-bottom:8px;box-shadow:var(--sh)}
+    .story-scene{background:var(--surf);padding:24px 26px;position:relative;overflow:hidden}
+    .story-scene::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--scene-color,var(--amber))}
+    .scene-num{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+    .scene-dot{width:7px;height:7px;border-radius:50%;background:var(--scene-color,var(--amber))}
+    .scene-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;margin-bottom:10px;line-height:1.2}
+    .scene-body{font-size:13px;color:var(--muted);line-height:1.65}
+    .scene-body strong{color:var(--txt);font-weight:600}
+
+    /* ── KPI STRIP ── */
+    .kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+    .kpi{background:var(--surf);border:1px solid var(--bdr);border-radius:14px;padding:18px 20px;box-shadow:var(--sh);position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+    .kpi:hover{transform:translateY(-3px);box-shadow:var(--sh2)}
+    .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--kc,var(--amber))}
+    .kpi .ico{position:absolute;right:16px;top:14px;font-size:20px;opacity:.12}
+    .kpi-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:7px}
+    .kpi-val{font-family:'Fraunces',serif;font-size:26px;font-weight:900;line-height:1;margin-bottom:6px}
+    .kpi-d{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;display:inline-block}
+    .up{background:rgba(42,107,80,.1);color:var(--green)}
+    .dn{background:rgba(200,98,42,.1);color:var(--amber)}
+
+    /* ── PROBLEM / SOLUTION GRID ── */
+    .ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .ps-card{background:var(--surf);border:1px solid var(--bdr);border-radius:16px;padding:22px 24px;box-shadow:var(--sh);position:relative;overflow:hidden;transition:box-shadow .2s}
+    .ps-card:hover{box-shadow:var(--sh2)}
+    .ps-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0 0,var(--card-glow,rgba(200,98,42,.04)),transparent 60%);pointer-events:none}
+    .ps-type{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+    .ps-icon-wrap{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
+    .ps-title{font-family:'Fraunces',serif;font-size:16px;font-weight:700;line-height:1.3;margin-bottom:8px}
+    .ps-body{font-size:13px;color:var(--muted);line-height:1.65}
+    .ps-body strong{color:var(--txt);font-weight:600}
+    .ps-tag{margin-top:14px;display:inline-block;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--bdr)}
+
+    /* ── CHARTS ── */
     .g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
     .g21{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+    .card{background:var(--surf);border:1px solid var(--bdr);border-radius:16px;box-shadow:var(--sh);overflow:hidden;transition:box-shadow .2s}
+    .card:hover{box-shadow:var(--sh2)}
+    .ch{padding:16px 20px 14px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+    .ct{font-family:'Fraunces',serif;font-size:15px;font-weight:600;display:flex;align-items:center;gap:7px}
+    .cp{font-size:11px;padding:3px 9px;border-radius:999px;background:var(--surf2);border:1px solid var(--bdr);color:var(--muted)}
+    .cw{padding:14px 18px 18px}
+    .cw canvas{max-height:230px}
 
-    /* Card */
-    .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;transition:transform .2s,box-shadow .2s}
-    .card:hover{box-shadow:var(--shadow-lg)}
-    .ch{padding:18px 22px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-    .ct{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
-    .cp{font-size:11px;font-weight:500;padding:3px 10px;border-radius:999px;background:var(--surface2);border:1px solid var(--border);color:var(--muted)}
-    .cb{padding:20px 22px}
-    .cw{padding:16px 20px 20px}
-    .cw canvas{max-height:240px}
-
-    /* Table */
+    /* ── TABLE ── */
     table{width:100%;border-collapse:collapse}
-    th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:10px 14px;background:var(--surface2);border-bottom:1px solid var(--border);text-align:left}
-    td{padding:11px 14px;border-bottom:1px solid var(--border);font-size:13px}
+    th{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:9px 14px;background:var(--surf2);border-bottom:1px solid var(--bdr);text-align:left}
+    td{padding:10px 14px;border-bottom:1px solid var(--bdr);font-size:13px}
     tr:last-child td{border-bottom:none}
-    tr:hover td{background:var(--surface2)}
-    .bi{display:flex;align-items:center;gap:8px}
-    .bb{flex:1;height:6px;background:var(--border);border-radius:999px;overflow:hidden}
+    tr:hover td{background:var(--surf2)}
+    .bi{display:flex;align-items:center;gap:7px}
+    .bb{flex:1;height:5px;background:var(--bdr);border-radius:999px;overflow:hidden}
     .bf{height:100%;border-radius:999px}
 
-    /* Region bars */
-    .rl{display:flex;flex-direction:column;gap:12px}
-    .ri{display:flex;flex-direction:column;gap:4px}
-    .rr{display:flex;justify-content:space-between;font-size:13px}
+    /* ── REGION ── */
+    .rl{display:flex;flex-direction:column;gap:14px}
+    .ri-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
     .rn{font-weight:600}
     .rv{color:var(--muted);font-weight:500}
-    .rb{height:8px;background:var(--border);border-radius:999px;overflow:hidden}
+    .rb{height:7px;background:var(--bdr);border-radius:999px;overflow:hidden}
     .rf{height:100%;border-radius:999px}
 
-    /* Chat */
-    .chat-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
-    .chat-hdr{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#1a1714 0%,#2d2420 100%);color:#fff}
-    .bot-ic{width:36px;height:36px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
-    .bot-name{font-weight:700;font-size:14px}
-    .bot-st{font-size:11px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px}
-    .bot-st::before{content:'';width:6px;height:6px;background:var(--accent3);border-radius:50%}
-    .cf{display:flex;flex-direction:column;gap:6px;padding:14px 18px;border-bottom:1px solid var(--border);background:var(--surface2)}
-    .fc{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
-    .jf{flex:1;min-height:420px;background:#fff}
-    #joonbot-embed{width:100%;height:100%;min-height:420px}
+    /* ── AI CHATBOT ── */
+    .ai-wrap{display:grid;grid-template-columns:1fr 380px;gap:20px}
+    .ai-chat-card{background:var(--surf);border:1px solid var(--bdr);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--sh);height:680px}
+    .ai-chat-hdr{padding:16px 20px;background:linear-gradient(135deg,#1c1814,#2e2218);color:#fff;display:flex;align-items:center;gap:12px;flex-shrink:0}
+    .ai-avatar{width:40px;height:40px;background:linear-gradient(135deg,var(--amber),#e8a060);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+    .ai-name{font-family:'Fraunces',serif;font-weight:700;font-size:15px}
+    .ai-status{font-size:11px;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:5px;margin-top:2px}
+    .ai-status::before{content:'';width:6px;height:6px;background:#4ade80;border-radius:50%;animation:blink 1.5s infinite}
+    .ai-model{margin-left:auto;font-size:10px;font-weight:600;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);padding:4px 9px;border-radius:6px;letter-spacing:.06em}
 
-    /* Misc */
-    ::-webkit-scrollbar{width:6px}
-    ::-webkit-scrollbar-track{background:var(--bg)}
-    ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-    .fade{animation:fi .4s ease both}
-    @keyframes fi{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    /* ── API KEY BANNER ── */
+    .api-key-bar{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fffbf0;border-bottom:1px solid #f0e8cc;flex-shrink:0}
+    .api-key-bar label{font-size:11px;font-weight:700;color:var(--gold);white-space:nowrap;display:flex;align-items:center;gap:5px}
+    #apiKeyInput{flex:1;padding:7px 12px;border:1px solid #e0d4a0;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:12px;background:#fff;color:var(--txt);outline:none;transition:border-color .15s}
+    #apiKeyInput:focus{border-color:var(--amber)}
+    #apiKeySaveBtn{padding:7px 14px;background:var(--amber);color:#fff;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap}
+    #apiKeySaveBtn:hover{background:#b3562a}
+    .api-key-hint{font-size:10px;color:var(--muted);flex-shrink:0}
+    .key-status{font-size:11px;font-weight:600;padding:4px 9px;border-radius:999px;white-space:nowrap}
+    .key-status.set{background:rgba(42,107,80,.1);color:var(--green)}
+    .key-status.unset{background:rgba(200,98,42,.1);color:var(--amber)}
 
-    @media(max-width:1200px){.kpi-row{grid-template-columns:repeat(3,1fr)}.g21{grid-template-columns:1fr}}
-    @media(max-width:900px){.sidebar{width:60px}.brand,.sub,.nav-item span,.nav-lbl,.sidebar-footer{display:none}.main{margin-left:60px}.g2{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(2,1fr)}}
+    .ai-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;background:var(--surf2)}
+    .msg{display:flex;gap:8px;animation:msgIn .25s ease both}
+    @keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .msg.user{flex-direction:row-reverse}
+    .msg-bubble{max-width:82%;padding:10px 13px;border-radius:13px;font-size:13px;line-height:1.55}
+    .msg.bot  .msg-bubble{background:var(--surf);border:1px solid var(--bdr);color:var(--txt);border-radius:4px 13px 13px 13px}
+    .msg.user .msg-bubble{background:linear-gradient(135deg,var(--amber),#d4753a);color:#fff;border-radius:13px 4px 13px 13px}
+    .msg-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px}
+    .msg.bot  .msg-av{background:#e8e2d8;color:var(--amber)}
+    .msg.user .msg-av{background:var(--amber);color:#fff}
+    .typing{display:flex;align-items:center;gap:4px;padding:10px 14px;background:var(--surf);border:1px solid var(--bdr);border-radius:4px 13px 13px 13px;width:fit-content}
+    .typing span{width:6px;height:6px;background:var(--muted);border-radius:50%;animation:bounce .9s infinite}
+    .typing span:nth-child(2){animation-delay:.15s}
+    .typing span:nth-child(3){animation-delay:.3s}
+    @keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+
+    .ai-input-row{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--bdr);background:var(--surf);flex-shrink:0}
+    #userInput{flex:1;padding:9px 14px;border:1px solid var(--bdr);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:13px;background:var(--surf2);color:var(--txt);outline:none;transition:border-color .15s}
+    #userInput:focus{border-color:var(--amber)}
+    #sendBtn{padding:9px 18px;background:var(--amber);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap}
+    #sendBtn:hover{background:#b3562a}
+    #sendBtn:disabled{opacity:.55;cursor:not-allowed}
+
+    /* ── QUICK PROMPTS ── */
+    .quick-prompts{flex-shrink:0;padding:10px 14px 0;background:var(--surf);border-top:1px solid var(--bdr)}
+    .qp-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:7px}
+    .qp-row{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:10px}
+    .qp{font-size:11px;font-weight:500;padding:5px 10px;border-radius:7px;background:var(--surf2);border:1px solid var(--bdr);color:var(--txt);cursor:pointer;transition:.15s;font-family:'DM Sans',sans-serif}
+    .qp:hover{background:rgba(200,98,42,.08);border-color:var(--amber);color:var(--amber)}
+
+    /* ── AI SIDE CARDS ── */
+    .ai-side{display:flex;flex-direction:column;gap:14px}
+    .ai-side-card{background:var(--surf);border:1px solid var(--bdr);border-radius:14px;padding:20px;box-shadow:var(--sh)}
+    .asc-icon{font-size:26px;margin-bottom:10px}
+    .asc-title{font-family:'Fraunces',serif;font-size:15px;font-weight:700;margin-bottom:6px}
+    .asc-body{font-size:12px;color:var(--muted);line-height:1.6}
+    .asc-tag{margin-top:10px;font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;border:1px solid var(--bdr);display:inline-block}
+
+    /* ── FOOTER ── */
+    .footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--bdr);text-align:center;color:var(--muted);font-size:12px}
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:4px}
+
+    @media(max-width:1280px){.story-band{grid-template-columns:1fr}.kpi-row{grid-template-columns:repeat(3,1fr)}.g21{grid-template-columns:1fr}.ai-wrap{grid-template-columns:1fr}}
+    @media(max-width:960px){.g2{grid-template-columns:1fr}.ps-grid{grid-template-columns:1fr}.sb{width:60px}.sb-brand,.sb-tag,.sb-item span,.sb-section,.sb-foot{display:none}.main{margin-left:60px}.kpi-row{grid-template-columns:repeat(2,1fr)}}
   </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-  <div class="sidebar-logo">
-    <div class="brand">Nova<span>Spark</span></div>
-    <div class="sub">Sales Intelligence</div>
+<!-- ════════ SIDEBAR ════════ -->
+<aside class="sb">
+  <div class="sb-logo">
+    <div class="sb-brand">Nova<em>Spark</em></div>
+    <div class="sb-tag">Sales Intelligence</div>
   </div>
-  <nav class="sidebar-nav">
-    <div class="nav-lbl">Analytics</div>
-    <a class="nav-item active" href="#"><span class="nav-icon">📊</span><span>Overview</span></a>
-    <a class="nav-item" href="#"><span class="nav-icon">🛒</span><span>Transactions</span></a>
-    <a class="nav-item" href="#"><span class="nav-icon">📦</span><span>SKU Performance</span></a>
-    <a class="nav-item" href="#"><span class="nav-icon">🌏</span><span>Regions</span></a>
-    <div class="nav-lbl">Intelligence</div>
-    <a class="nav-item" href="#"><span class="nav-icon">👥</span><span>Customers</span></a>
-    <a class="nav-item" href="#"><span class="nav-icon">🤖</span><span>AI Assistant</span></a>
-    <a class="nav-item" href="#"><span class="nav-icon">⚙️</span><span>Settings</span></a>
+  <nav class="sb-nav">
+    <div class="sb-section">Platform</div>
+    <a class="sb-item active" href="#story"><span class="ic">📖</span><span>Story</span></a>
+    <a class="sb-item" href="#problems"><span class="ic">⚠️</span><span>Problems</span></a>
+    <a class="sb-item" href="#solutions"><span class="ic">✅</span><span>Solutions</span></a>
+    <div class="sb-section">Analytics</div>
+    <a class="sb-item" href="#kpis"><span class="ic">📊</span><span>KPIs</span></a>
+    <a class="sb-item" href="#charts"><span class="ic">📈</span><span>Revenue</span></a>
+    <a class="sb-item" href="#products"><span class="ic">📦</span><span>Products</span></a>
+    <div class="sb-section">AI</div>
+    <a class="sb-item" href="#chatbot"><span class="ic">🤖</span><span>AI Assistant</span></a>
   </nav>
-  <div class="sidebar-footer"><div class="fy-badge">FY 2024 · Live</div></div>
+  <div class="sb-foot"><div class="sb-badge">FY 2024 · Live</div></div>
 </aside>
 
-<!-- MAIN -->
+<!-- ════════ MAIN ════════ -->
 <div class="main">
   <header class="topbar">
-    <div>
-      <h1>Sales Intelligence Hub</h1>
-      <div class="subtitle">Global Consumer Electronics &amp; Lifestyle Retail · 420 Stores · 12 Countries</div>
+    <div class="tb-left">
+      <h1>NovaSpark Sales Intelligence Hub</h1>
+      <p>Global Consumer Electronics &amp; Lifestyle · 420 Stores · 12 Countries · FY 2023–2024</p>
     </div>
-    <div class="topbar-right">
-      <span class="live-dot">Live Data</span>
-      <span class="date-chip">📅 FY 2023 – 2024</span>
+    <div class="tb-right">
+      <span class="pulse">Data Live</span>
+      <span class="chip">📅 FY 2023–2024</span>
     </div>
   </header>
 
   <div class="content">
 
-    <!-- KPIs -->
-    <div class="sh"><h2>Key Performance Indicators</h2></div>
-    <div class="kpi-row fade">
-      <div class="kpi-card" style="--kc:#c8622a"><div class="kpi-icon">💰</div><div class="kpi-lbl">Total Revenue</div><div class="kpi-val">$847.3M</div><span class="kpi-delta up">↑ +18.4% YoY</span></div>
-      <div class="kpi-card" style="--kc:#3a6b9e"><div class="kpi-icon">🛒</div><div class="kpi-lbl">Total Orders</div><div class="kpi-val">6.82M</div><span class="kpi-delta up">↑ +22.1% YoY</span></div>
-      <div class="kpi-card" style="--kc:#2d7a5e"><div class="kpi-icon">👥</div><div class="kpi-lbl">Active Customers</div><div class="kpi-val">1.24M</div><span class="kpi-delta up">↑ +14.7% YoY</span></div>
-      <div class="kpi-card" style="--kc:#9b4d8e"><div class="kpi-icon">💎</div><div class="kpi-lbl">Avg Order Value</div><div class="kpi-val">$124.20</div><span class="kpi-delta up">↑ +4.3% YoY</span></div>
-      <div class="kpi-card" style="--kc:#d4983a"><div class="kpi-icon">🏆</div><div class="kpi-lbl">NPS Score</div><div class="kpi-val">72</div><span class="kpi-delta up">↑ +9 pts</span></div>
+    <!-- ── STORY ── -->
+    <div id="story" class="slabel"><h2>📖 Project Storyline</h2></div>
+    <div class="story-band">
+      <div class="story-scene" style="--scene-color:#c8622a">
+        <div class="scene-num"><div class="scene-dot"></div>Scene 1 — The Opportunity</div>
+        <div class="scene-title">A Retailer Drowning in Data, Starving for Insight</div>
+        <div class="scene-body">
+          <strong>NovaSpark Retail</strong> — a fast-growing omni-channel consumer-electronics brand with <strong>420 stores across 12 countries</strong> — was sitting on 18 months of raw transaction data but had no unified way to read it. Revenue leakage was invisible. Stockouts were reactive. The company's <strong>2,400 SKUs</strong> had never been ranked by true profitability. The sales force worked blind, with no daily signals telling them which customers to call, which products to push, or which regions to protect.
+        </div>
+      </div>
+      <div class="story-scene" style="--scene-color:#2e5f8a">
+        <div class="scene-num"><div class="scene-dot" style="background:#2e5f8a"></div>Scene 2 — The Intelligence Layer</div>
+        <div class="scene-title">Fusing Data Streams into a Single Command Centre</div>
+        <div class="scene-body">
+          The data science team fused <strong>point-of-sale records, e-commerce clickstreams, CRM loyalty events, supply-chain lead times,</strong> and external macro signals (inflation index, consumer sentiment) into one <strong>Microsoft Fabric OneLake lakehouse</strong>. Machine-learning models scored every customer on churn risk, upsell probability, and lifetime value — giving the sales force a daily <strong>"next-best-action" queue</strong> for the first time. Real-time dashboards replaced static spreadsheets.
+        </div>
+      </div>
+      <div class="story-scene" style="--scene-color:#2a6b50">
+        <div class="scene-num"><div class="scene-dot" style="background:#2a6b50"></div>Scene 3 — The Results</div>
+        <div class="scene-title">Award-Winning Outcomes in Under Two Quarters</div>
+        <div class="scene-body">
+          Within two quarters, NovaSpark achieved a <strong>23% lift in revenue-per-visitor</strong>, reduced stockouts by <strong>41%</strong>, and cut promotional over-spend by <strong>$4.2M</strong>. Repeat purchase rate climbed to <strong>63.8%</strong> (+7.1 pp) and NPS hit <strong>72</strong> (up 9 points). The platform earned the <strong>Gartner Retail Analytics Excellence Award 2024</strong> and became a <strong>Microsoft Fabric OneLake reference architecture showcase</strong> — a model for the entire industry.
+        </div>
+      </div>
     </div>
 
-    <!-- Revenue charts -->
-    <div class="sh" style="margin-top:28px"><h2>Revenue Trends</h2></div>
+    <!-- ── BUSINESS PROBLEMS ── -->
+    <div id="problems" class="slabel"><h2>⚠️ Business Problem Statements</h2></div>
+    <div class="ps-grid">
+      <div class="ps-card" style="--card-glow:rgba(200,98,42,.05)">
+        <div class="ps-type" style="color:var(--amber)">🔴 Problem 01 — Revenue Intelligence</div>
+        <div class="ps-icon-wrap" style="background:rgba(200,98,42,.1)">💸</div>
+        <div class="ps-title">Hidden Revenue Leakage Across 2,400 SKUs</div>
+        <div class="ps-body">NovaSpark had no single view of which SKUs were truly profitable after accounting for returns, discounts, and COGS. Gross margin ranged from <strong>38% to 62%</strong> across the catalogue, but managers were making ranging decisions on revenue alone — not profit. <strong>Estimated loss: $12–15M annually</strong> in suboptimal promotions and markdowns.</div>
+        <div class="ps-tag" style="color:var(--amber);border-color:rgba(200,98,42,.25)">Revenue Leakage · SKU Profitability</div>
+      </div>
+      <div class="ps-card" style="--card-glow:rgba(46,95,138,.05)">
+        <div class="ps-type" style="color:var(--blue)">🔴 Problem 02 — Demand Forecasting</div>
+        <div class="ps-icon-wrap" style="background:rgba(46,95,138,.1)">📦</div>
+        <div class="ps-title">Reactive Inventory Causing Stockouts &amp; Overstock</div>
+        <div class="ps-body">Inventory decisions were based on last-month's sales, ignoring seasonality, campaign signals, and macro trends. Gaming and Smartphones saw <strong>demand surges of 60–90%</strong> in Q4, yet replenishment was triggered only after stockout events. The cost: lost sales, emergency freight, and $3.8M in excess slow-moving inventory elsewhere.</div>
+        <div class="ps-tag" style="color:var(--blue);border-color:rgba(46,95,138,.25)">Demand Planning · Supply Chain</div>
+      </div>
+      <div class="ps-card" style="--card-glow:rgba(107,74,138,.05)">
+        <div class="ps-type" style="color:var(--purple)">🔴 Problem 03 — Customer Intelligence</div>
+        <div class="ps-icon-wrap" style="background:rgba(107,74,138,.1)">👥</div>
+        <div class="ps-title">11.2% Churn Rate with No Early-Warning System</div>
+        <div class="ps-body">Customers were churning silently — no model existed to flag at-risk accounts before they left. Enterprise B2B and Premium Consumer segments, which drove <strong>67% of gross profit</strong>, were the highest-value targets but had no dedicated retention triggers. Sales reps had no next-best-action guidance, leading to reactive rather than proactive engagement.</div>
+        <div class="ps-tag" style="color:var(--purple);border-color:rgba(107,74,138,.25)">Customer Retention · CLV Scoring</div>
+      </div>
+      <div class="ps-card" style="--card-glow:rgba(184,134,42,.05)">
+        <div class="ps-type" style="color:var(--gold)">🔴 Problem 04 — Omni-Channel Visibility</div>
+        <div class="ps-icon-wrap" style="background:rgba(184,134,42,.1)">🌏</div>
+        <div class="ps-title">Siloed Channel Data Across 5 Commerce Touchpoints</div>
+        <div class="ps-body">Physical Store, E-Commerce, Mobile App, Partner Marketplace, and Click &amp; Collect each ran separate analytics stacks. There was no unified conversion funnel, no cross-channel basket attribution, and no way to compare <strong>Campaign ROI</strong> (ranging from 1.8x to 4.5x) across regions. Promotional budgets were allocated on gut feel rather than signal.</div>
+        <div class="ps-tag" style="color:var(--gold);border-color:rgba(184,134,42,.25)">Omni-Channel · Attribution</div>
+      </div>
+    </div>
+
+    <!-- ── SOLUTIONS ── -->
+    <div id="solutions" class="slabel"><h2>✅ Proposed AI-Powered Solutions</h2></div>
+    <div class="ps-grid">
+      <div class="ps-card" style="--card-glow:rgba(42,107,80,.05)">
+        <div class="ps-type" style="color:var(--green)">🟢 Solution 01 — SKU Profit Intelligence</div>
+        <div class="ps-icon-wrap" style="background:rgba(42,107,80,.1)">🧠</div>
+        <div class="ps-title">AI-Driven True-Profitability Ranking Engine</div>
+        <div class="ps-body">Deploy a <strong>generative AI layer (Claude API)</strong> that ingests GP margin, return rate, discount depth, and velocity data per SKU. It produces daily natural-language summaries — <em>"iPhone 15 Pro is your highest-margin Star SKU at 54.4% GP; consider reducing its discount tier from 15% to 10% in APAC."</em> Managers query the AI directly without touching raw data. <strong>Expected uplift: $4–6M gross profit recovery.</strong></div>
+        <div class="ps-tag" style="color:var(--green);border-color:rgba(42,107,80,.25)">Claude API · Generative AI · Profit Ops</div>
+      </div>
+      <div class="ps-card" style="--card-glow:rgba(46,95,138,.05)">
+        <div class="ps-type" style="color:var(--blue)">🟢 Solution 02 — Predictive Demand Forecasting</div>
+        <div class="ps-icon-wrap" style="background:rgba(46,95,138,.1)">🔮</div>
+        <div class="ps-title">8-Week Ahead Demand Signals with AI Alerts</div>
+        <div class="ps-body">ML models trained on POS history, clickstream intent, macro signals, and seasonality generate <strong>8-week demand forecasts</strong> per SKU per region. Integrated with an <strong>AI alert engine</strong> (Claude + Apps Script) that sends Slack/email notifications: <em>"Stockout risk: PlayStation 5 in APAC will hit zero in 12 days at current sell-through — reorder 340 units."</em> Stockout reduction target: <strong>−41%</strong> (achieved).</div>
+        <div class="ps-tag" style="color:var(--blue);border-color:rgba(46,95,138,.25)">ML Forecasting · Real-Time Alerts</div>
+      </div>
+      <div class="ps-card" style="--card-glow:rgba(107,74,138,.05)">
+        <div class="ps-type" style="color:var(--purple)">🟢 Solution 03 — Customer Churn Prevention AI</div>
+        <div class="ps-icon-wrap" style="background:rgba(107,74,138,.1)">🎯</div>
+        <div class="ps-title">Next-Best-Action Queue Powered by CLV Scoring</div>
+        <div class="ps-body">Every customer is scored daily on churn probability, upsell propensity, and lifetime value. A <strong>generative AI assistant</strong> translates scores into actionable scripts for reps: <em>"CUST-24592 (Enterprise B2B, Australia) has a 78% churn probability — last purchase was 47 days ago. Recommend outreach with a loyalty tier upgrade offer."</em> Repeat purchase rate lifted from <strong>56.7% → 63.8%</strong> in two quarters.</div>
+        <div class="ps-tag" style="color:var(--purple);border-color:rgba(107,74,138,.25)">CLV · Churn AI · Next-Best-Action</div>
+      </div>
+      <div class="ps-card" style="--card-glow:rgba(184,134,42,.05)">
+        <div class="ps-type" style="color:var(--gold)">🟢 Solution 04 — Unified Channel Intelligence</div>
+        <div class="ps-icon-wrap" style="background:rgba(184,134,42,.1)">⚡</div>
+        <div class="ps-title">Single Lakehouse View + AI Report Generator</div>
+        <div class="ps-body">All five channels feed into one <strong>Microsoft Fabric OneLake lakehouse</strong> with a unified data model. An <strong>AI report generator</strong> (Claude API) produces weekly executive briefings automatically: cross-channel conversion comparisons, campaign ROI rankings, basket-size anomalies, and regional performance gaps — in plain English, ready to present in 60 seconds. <strong>Promo over-spend saved: $4.2M.</strong></div>
+        <div class="ps-tag" style="color:var(--gold);border-color:rgba(184,134,42,.25)">OneLake · Fabric · Auto Reports</div>
+      </div>
+    </div>
+
+    <!-- ── KPIs ── -->
+    <div id="kpis" class="slabel"><h2>📊 Key Performance Indicators — FY 2024 vs FY 2023</h2></div>
+    <div class="kpi-row">
+      <div class="kpi" style="--kc:#c8622a"><div class="ico">💰</div><div class="kpi-lbl">Total Revenue</div><div class="kpi-val">$847.3M</div><span class="kpi-d up">↑ +18.4% YoY</span></div>
+      <div class="kpi" style="--kc:#2e5f8a"><div class="ico">🛒</div><div class="kpi-lbl">Total Orders</div><div class="kpi-val">6.82M</div><span class="kpi-d up">↑ +22.1% YoY</span></div>
+      <div class="kpi" style="--kc:#2a6b50"><div class="ico">👥</div><div class="kpi-lbl">Active Customers</div><div class="kpi-val">1.24M</div><span class="kpi-d up">↑ +14.7% YoY</span></div>
+      <div class="kpi" style="--kc:#6b4a8a"><div class="ico">💎</div><div class="kpi-lbl">Avg Order Value</div><div class="kpi-val">$124.20</div><span class="kpi-d up">↑ +4.3%</span></div>
+      <div class="kpi" style="--kc:#b8862a"><div class="ico">🏆</div><div class="kpi-lbl">NPS Score</div><div class="kpi-val">72</div><span class="kpi-d up">↑ +9 pts</span></div>
+    </div>
+
+    <!-- ── CHARTS ── -->
+    <div id="charts" class="slabel"><h2>📈 Revenue Analysis</h2></div>
     <div class="g2">
-      <div class="card">
-        <div class="ch"><div class="ct">📈 Monthly Revenue by Category ($M)</div><span class="cp">FY 2024</span></div>
-        <div class="cw"><canvas id="revChart"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="ch"><div class="ct">🍩 Revenue Mix by Category</div><span class="cp">FY Total</span></div>
-        <div class="cw"><canvas id="catChart"></canvas></div>
-      </div>
+      <div class="card"><div class="ch"><div class="ct">📈 Monthly Revenue by Category ($M)</div><span class="cp">FY 2024 — All 8 Categories</span></div><div class="cw"><canvas id="revChart"></canvas></div></div>
+      <div class="card"><div class="ch"><div class="ct">🍩 Category Revenue Mix</div><span class="cp">FY Total Share</span></div><div class="cw"><canvas id="catChart"></canvas></div></div>
     </div>
 
-    <!-- SKU + Region + Total -->
-    <div class="sh" style="margin-top:28px"><h2>Product &amp; Regional Performance</h2></div>
+    <!-- ── PRODUCTS + REGION ── -->
+    <div id="products" class="slabel"><h2>📦 Product &amp; Regional Performance</h2></div>
     <div class="g21">
       <div class="card">
-        <div class="ch"><div class="ct">📦 Top SKU Performance</div><span class="cp">by Revenue</span></div>
+        <div class="ch"><div class="ct">📦 Top SKU Performance</div><span class="cp">by Revenue · GP Margin</span></div>
         <div style="overflow-x:auto">
           <table>
-            <thead><tr><th>Product</th><th>Revenue</th><th>GP Margin</th><th>Tier</th></tr></thead>
+            <thead><tr><th>Product</th><th>Revenue</th><th>GP Margin</th><th>Stockout Risk</th><th>Tier</th></tr></thead>
             <tbody>
-              <tr><td><strong>iPhone 15 Pro</strong><br><small style="color:var(--muted)">SP-001 · Smartphones</small></td><td>$6.17M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:54%;background:var(--accent3)"></div></div><span>54.4%</span></div></td><td style="color:var(--gold);font-weight:700">⭐ Star</td></tr>
-              <tr><td><strong>Google Pixel 8</strong><br><small style="color:var(--muted)">SP-003 · Smartphones</small></td><td>$4.60M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:52%;background:var(--accent3)"></div></div><span>52.0%</span></div></td><td style="color:var(--gold);font-weight:700">⭐ Star</td></tr>
-              <tr><td><strong>Dell XPS 15</strong><br><small style="color:var(--muted)">LP-002 · Laptops</small></td><td>$2.09M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:43%;background:var(--accent2)"></div></div><span>42.7%</span></div></td><td style="color:var(--accent2);font-weight:600">✅ Core</td></tr>
-              <tr><td><strong>MacBook Air M3</strong><br><small style="color:var(--muted)">LP-001 · Laptops</small></td><td>$2.05M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:43%;background:var(--accent2)"></div></div><span>42.8%</span></div></td><td style="color:var(--accent2);font-weight:600">✅ Core</td></tr>
-              <tr><td><strong>Apple Watch Ultra 2</strong><br><small style="color:var(--muted)">WR-001 · Wearables</small></td><td>$1.97M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:47%;background:var(--accent2)"></div></div><span>47.5%</span></div></td><td style="color:var(--gold);font-weight:700">⭐ Star</td></tr>
-              <tr><td><strong>iPad Pro 12.9</strong><br><small style="color:var(--muted)">TB-001 · Tablets</small></td><td>$1.86M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:44%;background:var(--gold)"></div></div><span>44.3%</span></div></td><td style="color:var(--accent2);font-weight:600">✅ Core</td></tr>
-              <tr><td><strong>PlayStation 5</strong><br><small style="color:var(--muted)">GM-001 · Gaming</small></td><td>$1.58M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:43%;background:var(--accent4)"></div></div><span>43.2%</span></div></td><td style="color:var(--accent2);font-weight:600">✅ Core</td></tr>
-              <tr><td><strong>Samsung Galaxy S24</strong><br><small style="color:var(--muted)">SP-002 · Smartphones</small></td><td>$1.13M</td><td><div class="bi"><div class="bb"><div class="bf" style="width:46%;background:var(--accent2)"></div></div><span>46.1%</span></div></td><td style="color:var(--gold);font-weight:700">⭐ Star</td></tr>
+              <tr><td><strong>iPhone 15 Pro</strong><br><small style="color:var(--muted)">SP-001 · Smartphones</small></td><td><strong>$6.17M</strong></td><td><div class="bi"><div class="bb"><div class="bf" style="width:54%;background:var(--green)"></div></div>54.4%</div></td><td><span style="color:var(--green);font-weight:600;font-size:12px">🟢 LOW</span></td><td style="color:var(--gold);font-weight:700">⭐ Star</td></tr>
+              <tr><td><strong>Google Pixel 8</strong><br><small style="color:var(--muted)">SP-003 · Smartphones</small></td><td><strong>$4.60M</strong></td><td><div class="bi"><div class="bb"><div class="bf" style="width:52%;background:var(--green)"></div></div>52.0%</div></td><td><span style="color:var(--green);font-weight:600;font-size:12px">🟢 LOW</span></td><td style="color:var(--gold);font-weight:700">⭐ Star</td></tr>
+              <tr><td><strong>Dell XPS 15</strong><br><small style="color:var(--muted)">LP-002 · Laptops</small></td><td><strong>$2.09M</strong></td><td><div class="bi"><div class="bb"><div class="bf" style="width:43%;background:var(--blue)"></div></div>42.7%</div></td><td><span style="color:var(--green);font-weight:600;font-size:12px">🟢 LOW</span></td><td style="color:var(--blue);font-weight:600">✅ Core</td></tr>
+              <tr><td><strong>MacBook Air M3</strong><br><small style="color:var(--muted)">LP-001 · Laptops</small></td><td><strong>$2.05M</strong></td><td><div class="bi"><div class="bb"><div class="bf" style="width:43%;background:var(--blue)"></div></div>42.8%</div></td><td><span style="color:var(--green);font-weight:600;font-size:12px">🟢 LOW</span></td><td style="color:var(--blue);font-weight:600">✅ Core</td></tr>
+              <tr><td><strong>Apple Watch Ultra 2</strong><br><small style="color:var(--muted)">WR-001 · Wearables</small></td><td><strong>$1.97M</strong></td><td><div class="bi"><div class="bb"><div class="bf" style="width:48%;background:var(--blue)"></div></div>47.5%</div></td><td><span style="color:var(--amber);font-weight:600;font-size:12px">🟡 MEDIUM</span></td><td style="color:var(--gold);font-weight:700">⭐ Star</td></tr>
+              <tr><td><strong>iPad Pro 12.9</strong><br><small style="color:var(--muted)">TB-001 · Tablets</small></td><td><strong>$1.86M</strong></td><td><div class="bi"><div class="bb"><div class="bf" style="width:44%;background:var(--gold)"></div></div>44.3%</div></td><td><span style="color:var(--green);font-weight:600;font-size:12px">🟢 LOW</span></td><td style="color:var(--blue);font-weight:600">✅ Core</td></tr>
+              <tr><td><strong>PlayStation 5</strong><br><small style="color:var(--muted)">GM-001 · Gaming</small></td><td><strong>$1.58M</strong></td><td><div class="bi"><div class="bb"><div class="bf" style="width:43%;background:var(--purple)"></div></div>43.2%</div></td><td><span style="color:var(--amber);font-weight:600;font-size:12px">🟡 MEDIUM</span></td><td style="color:var(--blue);font-weight:600">✅ Core</td></tr>
+              <tr><td><strong>Samsung Galaxy S24</strong><br><small style="color:var(--muted)">SP-002 · Smartphones</small></td><td><strong>$1.13M</strong></td><td><div class="bi"><div class="bb"><div class="bf" style="width:46%;background:var(--blue)"></div></div>46.1%</div></td><td><span style="color:var(--green);font-weight:600;font-size:12px">🟢 LOW</span></td><td style="color:var(--gold);font-weight:700">⭐ Star</td></tr>
             </tbody>
           </table>
         </div>
       </div>
-
       <div style="display:flex;flex-direction:column;gap:20px">
         <div class="card">
           <div class="ch"><div class="ct">🌏 Revenue by Region ($M)</div></div>
-          <div class="cb">
+          <div class="cw">
             <div class="rl">
-              <div class="ri"><div class="rr"><span class="rn">Europe</span><span class="rv">$341.8M</span></div><div class="rb"><div class="rf" style="width:100%;background:var(--accent2)"></div></div></div>
-              <div class="ri"><div class="rr"><span class="rn">Asia Pacific</span><span class="rv">$337.8M</span></div><div class="rb"><div class="rf" style="width:98.8%;background:var(--accent3)"></div></div></div>
-              <div class="ri"><div class="rr"><span class="rn">North America</span><span class="rv">$247.1M</span></div><div class="rb"><div class="rf" style="width:72.3%;background:var(--accent)"></div></div></div>
-              <div class="ri"><div class="rr"><span class="rn">Latin America</span><span class="rv">$105.9M</span></div><div class="rb"><div class="rf" style="width:31%;background:var(--gold)"></div></div></div>
+              <div><div class="ri-row"><span class="rn">Europe</span><span class="rv">$341.8M · 33%</span></div><div class="rb"><div class="rf" style="width:100%;background:var(--blue)"></div></div></div>
+              <div><div class="ri-row"><span class="rn">Asia Pacific</span><span class="rv">$337.8M · 32%</span></div><div class="rb"><div class="rf" style="width:98.8%;background:var(--green)"></div></div></div>
+              <div><div class="ri-row"><span class="rn">North America</span><span class="rv">$247.1M · 24%</span></div><div class="rb"><div class="rf" style="width:72%;background:var(--amber)"></div></div></div>
+              <div><div class="ri-row"><span class="rn">Latin America</span><span class="rv">$105.9M · 10%</span></div><div class="rb"><div class="rf" style="width:31%;background:var(--gold)"></div></div></div>
             </div>
           </div>
         </div>
         <div class="card">
-          <div class="ch"><div class="ct">📊 Total Monthly Revenue ($M)</div></div>
-          <div class="cw" style="padding:14px 16px 16px"><canvas id="totalChart" style="max-height:160px"></canvas></div>
+          <div class="ch"><div class="ct">📊 Grand Total Monthly ($M)</div></div>
+          <div class="cw" style="padding:12px 16px 16px"><canvas id="totalChart" style="max-height:155px"></canvas></div>
         </div>
       </div>
     </div>
 
-    <!-- AI Chat -->
-    <div class="sh" style="margin-top:28px"><h2>AI Sales Assistant</h2></div>
-    <div class="g21">
-      <div class="chat-card">
-        <div class="chat-hdr">
-          <div class="bot-ic">🤖</div>
-          <div><div class="bot-name">NovaSpark AI Assistant</div><div class="bot-st">Online · Powered by Joonbot</div></div>
+    <!-- ── AI CHATBOT ── -->
+    <div id="chatbot" class="slabel"><h2>🤖 Generative AI Assistant — Powered by Claude</h2></div>
+    <div class="ai-wrap">
+
+      <!-- CHAT WINDOW -->
+      <div class="ai-chat-card">
+        <div class="ai-chat-hdr">
+          <div class="ai-avatar">🤖</div>
+          <div>
+            <div class="ai-name">NovaSpark Intelligence AI</div>
+            <div class="ai-status">Online · Ready to analyze your data</div>
+          </div>
+          <div class="ai-model">Claude · Sonnet 4</div>
         </div>
-        <div class="cf">
-          <div class="fc">💬 Ask about sales data, regions, top products</div>
-          <div class="fc">📋 Request instant summaries and insights</div>
-          <div class="fc">🔍 Search across all 600+ transaction records</div>
+
+        <!-- API KEY BAR -->
+        <div class="api-key-bar">
+          <label for="apiKeyInput">🔑 API Key</label>
+          <input id="apiKeyInput" type="password" placeholder="Paste your Anthropic API key here (sk-ant-…)" autocomplete="off"/>
+          <button id="apiKeySaveBtn" onclick="saveApiKey()">Save Key</button>
+          <span id="keyStatus" class="key-status unset">Not set</span>
         </div>
-        <div class="jf"><div id="joonbot-embed"></div></div>
+
+        <div class="ai-msgs" id="chatMessages">
+          <div class="msg bot">
+            <div class="msg-av">🤖</div>
+            <div class="msg-bubble">
+              👋 Hello! I'm the NovaSpark AI Assistant, powered by Claude.<br><br>
+              I have full context on your <strong>FY 2023–2024 Sales Intelligence dataset</strong> — 600 transactions across 12 countries, 24 SKUs, 8 product categories, and 5 sales channels.<br><br>
+              <strong>To get started:</strong> paste your Anthropic API key in the field above, click <em>Save Key</em>, then ask me anything about revenue trends, SKU profitability, customer segments, regional performance, stockout risks, or the business story behind the numbers.
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-prompts">
+          <div class="qp-label">Quick Questions</div>
+          <div class="qp-row">
+            <button class="qp" onclick="sendQuick('What are the top 3 business problems NovaSpark faced?')">Top business problems</button>
+            <button class="qp" onclick="sendQuick('Which product category has the highest gross profit margin?')">Best margin category</button>
+            <button class="qp" onclick="sendQuick('What caused the 41% stockout reduction?')">Stockout reduction story</button>
+            <button class="qp" onclick="sendQuick('Which region has the highest growth potential?')">Growth regions</button>
+            <button class="qp" onclick="sendQuick('Summarize the AI solutions proposed for NovaSpark')">AI solutions summary</button>
+            <button class="qp" onclick="sendQuick('Why did NovaSpark win the Gartner award?')">Gartner award reason</button>
+          </div>
+        </div>
+
+        <div class="ai-input-row">
+          <input id="userInput" type="text" placeholder="Ask about revenue, products, customers, regions…" onkeydown="if(event.key==='Enter')sendMessage()"/>
+          <button id="sendBtn" onclick="sendMessage()">Send ↗</button>
+        </div>
       </div>
 
-      <div style="display:flex;flex-direction:column;gap:16px">
-        <div class="card"><div class="cb">
-          <div style="font-size:24px;margin-bottom:10px">🧠</div>
-          <div style="font-weight:700;font-size:14px;margin-bottom:6px">Claude AI Integration</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6">Connect Anthropic Claude API to answer natural-language questions about NovaSpark data — ask "Which region had the highest Q4 growth?"</div>
-          <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--accent2);background:rgba(58,107,158,.08);padding:4px 10px;border-radius:999px;display:inline-block">anthropic.com/api</div>
-        </div></div>
-        <div class="card"><div class="cb">
-          <div style="font-size:24px;margin-bottom:10px">📈</div>
-          <div style="font-weight:700;font-size:14px;margin-bottom:6px">Auto Chart Generator</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6">Ask AI to visualize any column — Q4 revenue by country, top SKUs by margin, churn rate over time — charts rendered live.</div>
-          <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--accent3);background:rgba(45,122,94,.08);padding:4px 10px;border-radius:999px;display:inline-block">Chart.js + AI</div>
-        </div></div>
-        <div class="card"><div class="cb">
-          <div style="font-size:24px;margin-bottom:10px">🔔</div>
-          <div style="font-weight:700;font-size:14px;margin-bottom:6px">Smart Alerts</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6">AI monitors your data and sends alerts when stockout risk turns red, revenue dips, or NPS drops below threshold.</div>
-          <div style="margin-top:12px;font-size:11px;font-weight:600;color:var(--gold);background:rgba(212,152,58,.08);padding:4px 10px;border-radius:999px;display:inline-block">Apps Script + AI</div>
-        </div></div>
+      <!-- SIDE INFO CARDS -->
+      <div class="ai-side">
+        <div class="ai-side-card">
+          <div class="asc-icon">🔑</div>
+          <div class="asc-title">How to Get Your API Key</div>
+          <div class="asc-body">
+            1. Go to <strong>console.anthropic.com</strong><br>
+            2. Sign in or create a free account<br>
+            3. Navigate to <strong>API Keys</strong> in the left menu<br>
+            4. Click <strong>Create Key</strong>, copy it<br>
+            5. Paste it in the field above and click <strong>Save Key</strong><br><br>
+            Your key is stored only in this browser session and is never sent anywhere except directly to the Anthropic API.
+          </div>
+          <div class="asc-tag" style="color:var(--amber);border-color:rgba(200,98,42,.25)">Anthropic Console · Secure</div>
+        </div>
+        <div class="ai-side-card">
+          <div class="asc-icon">🧠</div>
+          <div class="asc-title">What This AI Knows</div>
+          <div class="asc-body">Fully briefed on NovaSpark's 18-month transaction history, all 4 business problem statements, proposed solutions, KPI targets, SKU performance tiers, regional revenue splits, and customer segment profiles (Enterprise B2B, SMB, Premium Consumer, Mid-Market, Value Seeker).</div>
+          <div class="asc-tag" style="color:var(--blue);border-color:rgba(46,95,138,.25)">Context-Aware Responses</div>
+        </div>
+        <div class="ai-side-card">
+          <div class="asc-icon">💬</div>
+          <div class="asc-title">What You Can Ask</div>
+          <div class="asc-body">Revenue by region, best and worst performing SKUs, churn risk patterns, channel conversion rates, campaign ROI comparisons, Q4 demand forecasts, customer tenure insights, payment method trends, and delivery performance analysis.</div>
+          <div class="asc-tag" style="color:var(--green);border-color:rgba(42,107,80,.25)">Natural Language Queries</div>
+        </div>
       </div>
     </div>
 
-    <div style="margin-top:40px;padding-top:20px;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:12px">
-      NovaSpark Sales Intelligence · FY 2023–2024 · 420 Stores · 12 Countries · Powered by Joonbot &amp; Chart.js
+    <div class="footer">
+      NovaSpark Sales Intelligence Platform · FY 2023–2024 · Gartner Retail Analytics Excellence Award 2024 · Microsoft Fabric OneLake Reference Architecture · AI powered by Anthropic Claude
     </div>
 
-  </div>
-</div>
+  </div><!-- /content -->
+</div><!-- /main -->
 
-<!-- CHARTS -->
+<!-- ════════ CHARTS ════════ -->
 <script>
-const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+new Chart(document.getElementById('revChart'),{type:'bar',data:{labels:months,datasets:[
+  {label:'Smartphones',data:[7.2,6.8,8.1,7.5,8.9,9.2,8.6,9.8,10.2,9.1,12.4,14.3],backgroundColor:'#c8622a'},
+  {label:'Laptops',    data:[5.4,4.9,6.2,5.8,6.7,7.1,6.4,7.3,7.9,6.8,9.2,10.8], backgroundColor:'#2e5f8a'},
+  {label:'Gaming',     data:[3.5,3.1,3.8,3.4,4.2,4.8,4.3,5.1,5.6,4.8,7.2,9.4],  backgroundColor:'#6b4a8a'},
+  {label:'Tablets',    data:[2.2,2.0,2.6,2.4,2.9,3.3,2.9,3.4,3.7,3.2,4.8,6.0],  backgroundColor:'#b8862a'},
+  {label:'Wearables',  data:[2.8,2.5,3.1,2.9,3.4,3.9,3.5,4.1,4.4,3.8,5.6,7.1],  backgroundColor:'#2a6b50'},
+  {label:'Audio',      data:[2.1,1.9,2.4,2.2,2.7,3.1,2.8,3.2,3.5,3.0,4.6,5.8],  backgroundColor:'#5a8a3e'},
+  {label:'Smart Home', data:[1.8,1.6,2.1,1.9,2.3,2.7,2.4,2.8,3.0,2.5,3.9,5.2],  backgroundColor:'#7a5a9e'},
+]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10},color:'#9a9085'}}},scales:{x:{stacked:true,grid:{color:'#ede8e0'},ticks:{color:'#9a9085',font:{size:10}}},y:{stacked:true,grid:{color:'#ede8e0'},ticks:{color:'#9a9085',font:{size:10},callback:v=>'$'+v+'M'}}}}});
 
-new Chart(document.getElementById('revChart').getContext('2d'),{
-  type:'bar',
-  data:{labels:months,datasets:[
-    {label:'Smartphones',data:[7.2,6.8,8.1,7.5,8.9,9.2,8.6,9.8,10.2,9.1,12.4,14.3],backgroundColor:'#c8622a'},
-    {label:'Laptops',    data:[5.4,4.9,6.2,5.8,6.7,7.1,6.4,7.3,7.9,6.8,9.2,10.8], backgroundColor:'#3a6b9e'},
-    {label:'Gaming',     data:[3.5,3.1,3.8,3.4,4.2,4.8,4.3,5.1,5.6,4.8,7.2,9.4],  backgroundColor:'#9b4d8e'},
-    {label:'Tablets',    data:[2.2,2.0,2.6,2.4,2.9,3.3,2.9,3.4,3.7,3.2,4.8,6.0],  backgroundColor:'#d4983a'},
-    {label:'Wearables',  data:[2.8,2.5,3.1,2.9,3.4,3.9,3.5,4.1,4.4,3.8,5.6,7.1],  backgroundColor:'#2d7a5e'},
-    {label:'Audio',      data:[2.1,1.9,2.4,2.2,2.7,3.1,2.8,3.2,3.5,3.0,4.6,5.8],  backgroundColor:'#5a8a3e'},
-    {label:'Smart Home', data:[1.8,1.6,2.1,1.9,2.3,2.7,2.4,2.8,3.0,2.5,3.9,5.2],  backgroundColor:'#7a5a9e'},
-  ]},
-  options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10},color:'#8a8279'}}},scales:{x:{stacked:true,grid:{color:'#e8e3d9'},ticks:{color:'#8a8279',font:{size:10}}},y:{stacked:true,grid:{color:'#e8e3d9'},ticks:{color:'#8a8279',font:{size:10},callback:v=>'$'+v+'M'}}}}
-});
+new Chart(document.getElementById('catChart'),{type:'doughnut',data:{labels:['Smartphones','Laptops','Tablets','Wearables','Gaming','Audio','Smart Home','Accessories'],datasets:[{data:[11.9,9.1,7.4,6.2,5.9,4.5,2.7,0.9],backgroundColor:['#c8622a','#2e5f8a','#b8862a','#2a6b50','#6b4a8a','#5a8a3e','#7a5a9e','#9e4a3a'],borderWidth:2,borderColor:'#ffffff',hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:true,cutout:'62%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10},color:'#9a9085',padding:10}},tooltip:{callbacks:{label:ctx=>` ${ctx.label}: $${ctx.parsed}M`}}}}});
 
-new Chart(document.getElementById('catChart').getContext('2d'),{
-  type:'doughnut',
-  data:{labels:['Smartphones','Laptops','Tablets','Wearables','Gaming','Audio','Smart Home','Accessories'],datasets:[{data:[11.9,9.1,7.4,6.2,5.9,4.5,2.7,0.9],backgroundColor:['#c8622a','#3a6b9e','#d4983a','#2d7a5e','#9b4d8e','#5a8a3e','#7a5a9e','#9e4a3a'],borderWidth:2,borderColor:'#ffffff',hoverOffset:6}]},
-  options:{responsive:true,maintainAspectRatio:true,cutout:'65%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10},color:'#8a8279',padding:10}},tooltip:{callbacks:{label:ctx=>` ${ctx.label}: $${ctx.parsed}M`}}}}
-});
-
-new Chart(document.getElementById('totalChart').getContext('2d'),{
-  type:'line',
-  data:{labels:months,datasets:[{label:'Grand Total ($M)',data:[25.9,23.6,29.4,27.1,32.3,35.5,32.1,37.2,40.0,34.6,49.9,61.5],borderColor:'#c8622a',backgroundColor:'rgba(200,98,42,0.08)',fill:true,tension:0.4,pointRadius:3,pointBackgroundColor:'#c8622a'}]},
-  options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#8a8279',font:{size:10}}},y:{grid:{color:'#e8e3d9'},ticks:{color:'#8a8279',font:{size:10},callback:v=>'$'+v+'M'}}}}
-});
+new Chart(document.getElementById('totalChart'),{type:'line',data:{labels:months,datasets:[{label:'Total ($M)',data:[25.9,23.6,29.4,27.1,32.3,35.5,32.1,37.2,40.0,34.6,49.9,61.5],borderColor:'#c8622a',backgroundColor:'rgba(200,98,42,0.07)',fill:true,tension:0.4,pointRadius:3,pointBackgroundColor:'#c8622a'}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#9a9085',font:{size:9}}},y:{grid:{color:'#ede8e0'},ticks:{color:'#9a9085',font:{size:9},callback:v=>'$'+v+'M'}}}}});
 </script>
 
-<!-- JOONBOT -->
-<script async type="text/javascript">
-  !function(){
-    if(window.JOONBOT_WIDGET_ID){console.warn("Joonbot snippet included twice");}
-    else{
-      window.JOONBOT_MODE="embed";
-      window.JOONBOT_WIDGET_ID="764472ea-fdfc-4ccd-85f1-656532c4bcda";
-      var n,o;
-      o=document.createElement("script");
-      o.src="https://js.joonbot.com/init.js";
-      o.defer=true;o.type="text/javascript";o.async=true;o.crossorigin="anonymous";
-      n=document.getElementsByTagName("script")[0];
-      n.parentNode.insertBefore(o,n);
+<!-- ════════ CLAUDE AI CHATBOT ════════ -->
+<script>
+const SYSTEM_PROMPT = `You are the NovaSpark Sales Intelligence AI Assistant, an expert analyst embedded in the NovaSpark Retail dashboard. You have deep knowledge of the following dataset and business context:
+
+## COMPANY CONTEXT
+NovaSpark Retail is a fast-growing omni-channel consumer-electronics and lifestyle brand with 420 stores across 12 countries. This dashboard covers FY 2023–2024 data.
+
+## THE STORYLINE
+SCENE 1 – THE OPPORTUNITY: NovaSpark had 18 months of raw transaction data but no unified intelligence. Revenue leakage was invisible, stockouts were reactive, and 2,400 SKUs had never been ranked by true profitability. The sales force worked blind with no next-best-action guidance.
+
+SCENE 2 – THE INTELLIGENCE LAYER: The data science team fused POS records, e-commerce clickstreams, CRM loyalty events, supply-chain lead times, and macro signals (inflation index, consumer sentiment) into one Microsoft Fabric OneLake lakehouse. ML models scored every customer on churn risk, upsell probability, and lifetime value.
+
+SCENE 3 – THE RESULTS: Within two quarters: 23% lift in revenue-per-visitor, 41% stockout reduction, $4.2M promo over-spend saved. Won the Gartner Retail Analytics Excellence Award 2024 and became a Microsoft Fabric OneLake reference architecture.
+
+## KEY KPIs (FY 2024 vs FY 2023)
+- Total Revenue: $847.3M (+18.4% YoY)
+- Total Orders: 6.82M (+22.1% YoY)
+- Active Customers: 1.24M (+14.7% YoY)
+- Units Sold: 9.47M (+19.2% YoY)
+- Avg Order Value: $124.20 (+4.3%)
+- Repeat Purchase Rate: 63.8% (+7.1 pp)
+- Churn Rate: 11.2% (−3.4 pp improvement)
+- Stockout Reduction: −41% vs prior
+- Promo Over-spend Saved: $4.2M
+- NPS Score: 72 (↑9 pts)
+
+## BUSINESS PROBLEMS
+1. REVENUE LEAKAGE: GP margin ranged 38–62% across 2,400 SKUs. Managers decided on revenue, not profit. Estimated $12–15M annual loss from suboptimal promotions.
+2. DEMAND FORECASTING: Inventory decisions based on last-month sales. Gaming and Smartphones had 60–90% Q4 demand surges. Cost: lost sales, emergency freight, $3.8M excess slow-moving inventory.
+3. CUSTOMER CHURN: 11.2% churn rate with no early-warning system. Enterprise B2B and Premium Consumer drove 67% of gross profit but had no retention triggers.
+4. CHANNEL SILOS: 5 channels (Physical Store, E-Commerce, Mobile App, Partner Marketplace, Click & Collect) had separate analytics. Campaign ROI ranged 1.8x–4.5x with no cross-channel view.
+
+## AI SOLUTIONS PROPOSED
+1. SKU PROFIT INTELLIGENCE: Claude API ingests GP margin, return rate, discount depth per SKU. Produces daily natural-language summaries. Expected $4–6M gross profit recovery.
+2. PREDICTIVE DEMAND FORECASTING: ML models with 8-week ahead forecasts per SKU/region. AI alert engine for stockout warnings. −41% stockout reduction achieved.
+3. CUSTOMER CHURN AI: Daily CLV and churn scoring. AI produces next-best-action scripts for sales reps. Repeat purchase rate improved from 56.7% to 63.8%.
+4. UNIFIED CHANNEL INTELLIGENCE: OneLake lakehouse unifies all 5 channels. AI report generator produces weekly executive briefings. $4.2M promo savings.
+
+## TOP SKUs BY REVENUE
+- iPhone 15 Pro (SP-001): $6.17M revenue, 54.4% GP margin, ⭐ Star tier, 🟢 LOW stockout risk
+- Google Pixel 8 (SP-003): $4.60M, 52.0% GP, ⭐ Star, 🟢 LOW
+- Dell XPS 15 (LP-002): $2.09M, 42.7% GP, ✅ Core
+- MacBook Air M3 (LP-001): $2.05M, 42.8% GP, ✅ Core
+- Apple Watch Ultra 2 (WR-001): $1.97M, 47.5% GP, ⭐ Star, 🟡 MEDIUM stockout
+- iPad Pro 12.9 (TB-001): $1.86M, 44.3% GP, ✅ Core
+- PlayStation 5 (GM-001): $1.58M, 43.2% GP, ✅ Core, 🟡 MEDIUM stockout
+- Samsung Galaxy S24 (SP-002): $1.13M, 46.1% GP, ⭐ Star
+
+## REVENUE BY REGION
+- Europe: $341.8M (33%)
+- Asia Pacific: $337.8M (32%)
+- North America: $247.1M (24%)
+- Latin America: $105.9M (10%)
+
+## MONTHLY REVENUE GRAND TOTAL ($M)
+Jan:25.9, Feb:23.6, Mar:29.4, Apr:27.1, May:32.3, Jun:35.5, Jul:32.1, Aug:37.2, Sep:40.0, Oct:34.6, Nov:49.9, Dec:61.5
+
+## CATEGORY REVENUE MIX
+Smartphones:$11.9M, Laptops:$9.1M, Tablets:$7.4M, Wearables:$6.2M, Gaming:$5.9M, Audio:$4.5M, Smart Home:$2.7M, Accessories:$0.9M
+
+## CUSTOMER SEGMENTS
+Enterprise B2B, SMB, Premium Consumer, Mid-Market, Value Seeker — across 12 countries: USA, Canada, Mexico, UK, France, Germany, Netherlands, Brazil, Colombia, Australia, India, Japan, Singapore.
+
+## CHANNELS
+Physical Store, E-Commerce, Mobile App, Partner Marketplace, Click & Collect. Campaign ROI ranges from 1.8x (Canada E-Commerce) to 4.52x (USA E-Commerce).
+
+Respond in a friendly, professional, analytical tone. Give specific numbers and insights from the data above. Keep answers concise but insightful — 3–6 sentences typically. Use bullet points for lists. When relevant, suggest what action NovaSpark should take.`;
+
+let ANTHROPIC_API_KEY = '';
+const conversationHistory = [];
+let isLoading = false;
+
+function saveApiKey() {
+  const input = document.getElementById('apiKeyInput');
+  const key = input.value.trim();
+  if (!key) {
+    alert('Please paste a valid Anthropic API key.');
+    return;
+  }
+  ANTHROPIC_API_KEY = key;
+  input.value = ''; // clear from UI for security
+  input.placeholder = '✅ Key saved for this session';
+  const status = document.getElementById('keyStatus');
+  status.textContent = '✅ Key set';
+  status.className = 'key-status set';
+  document.getElementById('apiKeySaveBtn').textContent = 'Update Key';
+  // Friendly confirmation message in chat
+  addBotMessage('🔑 API key saved! I\'m now connected to Claude. Ask me anything about the NovaSpark FY 2024 data — revenue trends, top SKUs, churn insights, or regional breakdowns.');
+}
+
+function addUserMessage(text) {
+  conversationHistory.push({ role: 'user', content: text });
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg user';
+  div.innerHTML = `<div class="msg-av">👤</div><div class="msg-bubble">${escapeHtml(text)}</div>`;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function addBotMessage(text) {
+  conversationHistory.push({ role: 'assistant', content: text });
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg bot';
+  div.innerHTML = `<div class="msg-av">🤖</div><div class="msg-bubble">${formatText(text)}</div>`;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function formatText(text) {
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\n/g,'<br>')
+    .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g,'<em>$1</em>');
+}
+
+function escapeHtml(t) {
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showTyping() {
+  const box = document.getElementById('chatMessages');
+  const t = document.createElement('div');
+  t.className = 'msg bot'; t.id = 'typing-indicator';
+  t.innerHTML = '<div class="msg-av">🤖</div><div class="typing"><span></span><span></span><span></span></div>';
+  box.appendChild(t);
+  box.scrollTop = box.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+
+async function sendMessage() {
+  const input = document.getElementById('userInput');
+  const text = input.value.trim();
+  if (!text || isLoading) return;
+
+  if (!ANTHROPIC_API_KEY) {
+    addBotMessage('⚠️ Please enter and save your Anthropic API key in the field above before sending a message.');
+    return;
+  }
+
+  input.value = '';
+  isLoading = true;
+  document.getElementById('sendBtn').disabled = true;
+
+  addUserMessage(text);
+  showTyping();
+
+  // Build messages array for API (only user/assistant turns)
+  const apiMessages = conversationHistory
+    .filter(m => m.role === 'user' || m.role === 'assistant')
+    .slice(0, -1) // exclude the user msg we just pushed (it's the last one)
+    .concat({ role: 'user', content: text });
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: apiMessages
+      })
+    });
+
+    const data = await response.json();
+    removeTyping();
+
+    if (data.error) {
+      addBotMessage(`⚠️ API Error: ${data.error.message || 'Unknown error. Please check your API key and try again.'}`);
+      // Remove the failed user message from history so it doesn't pollute future calls
+      conversationHistory.pop();
+    } else {
+      const reply = data.content?.[0]?.text || 'Sorry, I could not get a response. Please try again.';
+      addBotMessage(reply);
     }
-  }();
+  } catch (e) {
+    removeTyping();
+    addBotMessage('⚠️ Network error — unable to reach the Anthropic API. Please check your connection and try again.');
+    conversationHistory.pop();
+  }
+
+  isLoading = false;
+  document.getElementById('sendBtn').disabled = false;
+}
+
+function sendQuick(q) {
+  document.getElementById('userInput').value = q;
+  sendMessage();
+}
+
+// Sidebar smooth scroll active state
+document.querySelectorAll('.sb-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
 </script>
 
 </body>
 </html>
+prachi-2.txt
+Displaying prachi-2.txt.
